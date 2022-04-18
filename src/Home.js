@@ -1,45 +1,45 @@
 import { useEffect, useState } from "react";
-import BlogList from "./BlogList";
+import BlogList from './BlogList';
+import useFetch from './useFetch';
 
 const Home = () => {
-  const [blogs, setBlogs] = useState( null)
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
 
-  const handleDelete = (id) => {
-    const newBlogs = blogs.filter(blog => blog.id !== id);
-    setBlogs(newBlogs);
-  }
+const {data: blogs, isPending, error} = useFetch('http://localhost:8000/blogs')
 
-  useEffect(() => {
-    setTimeout(()=>{
-    fetch('http://localhost:8000/blogs')
-    .then(res=>{
-      console.log(res)
-      if(!res.ok){
-        throw Error('could not fetch the data for that resource')
-      }
-      return res.json()
-    }).then(data =>{
-          console.log(data)
-          setBlogs(data);
-          setIsPending(false);
-          setError(null)
-    }).catch(err=>{
-          setError(err.message);
-          setBlogs(null);
-          setIsPending(false)
-    })
-    }, 1000)
-  }, [])
+  const [count, setCount] = useState(0);
+  const [count1, setCount1] = useState(0);
+
+  // const handleDelete = (id) => {
+  //   const newBlogs = data.filter(blog => blog.id !== id);
+  //   setBlogs(newBlogs);
+  // }
+  console.log("1111111" + blogs)
+
+   useEffect(() => {
+    console.log(count);
+    document.title = `Вы нажали ${count} раз`;
+  },[count]);
 
   return (
-    <div className="home">
-    {error&&<div>{error}</div>}
-    {isPending&& <div>Loading...</div>}
-      {blogs && <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete} />}
+    <div>
+     
+      <div className="home">
+   {error&&<div>{error}</div>}
+     {isPending&& <div>Loading...</div>}
+      {/* {data && <BlogList blogs={data} title="All Blogs" handleDelete={handleDelete} />} */}
+     {blogs && <BlogList blogs={blogs} title="All Blogs"    />}
     </div>
+    <p>Total clicks: {count} </p>
+      <button onClick={() => setCount(count + 1)}>
+        Push me
+      </button>
+    </div>
+
   );
+
+
+
+
 }
  
 export default Home;
