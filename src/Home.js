@@ -23,22 +23,19 @@ const {data: blogs, isPending, error} = useFetch('http://localhost:8000/blogs')
   return (
     <div>
      
-      <div className="home">
-   {error&&<div>{error}</div>}
-     {isPending&& <div>Loading...</div>}
-      {/* {data && <BlogList blogs={data} title="All Blogs" handleDelete={handleDelete} />} */}
-     {blogs && <BlogList blogs={blogs} title="All Blogs"    />}
-    </div>
-    <p>Total clicks: {count} </p>
-      <button onClick={() => setCount(count + 1)}>
-        Push me
-      </button>
+           <div className="home">
+              {error&&<div>{error}</div>}
+              {isPending&& <div>Loading...</div>}
+              {/* {data && <BlogList blogs={data} title="All Blogs" handleDelete={handleDelete} />} */}
+              {blogs && <BlogList blogs={blogs} title="All Blogs"    />}
+           </div>
+          <p>Total clicks: {count} </p>
+          <button onClick={() => setCount(count + 1)}>
+            Push me
+          </button>
     </div>
 
   );
-
-
-
 
 }
  
