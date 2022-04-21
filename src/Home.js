@@ -5,8 +5,7 @@ import useFetch from './useFetch';
 const Home = () => {
 
 const {data: blogs, isPending, error} = useFetch('http://localhost:8000/blogs')
-
-  const [count, setCount] = useState(0);
+const [count, setCount] = useState(0);
   // const [count1, setCount1] = useState(0);
 
   // const handleDelete = (id) => {
